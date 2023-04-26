@@ -1,47 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from './components/Header';
 import InputForm from './components/InputForm';
 import Cards from './components/Cards';
 
 function App() {
-  const [watchList, setWatchList] = useState([]);
-  const cardsList = [
-    {text: 'This is a longer card with supporting text below as a natural lead-in to additional content.'},
-    {text: 'This card has supporting text below as a natural lead-in to additional content.'},
-  ];
-  
-  const handleAddClick = (cityId) => {    
-    setWatchList((prev) => {
-      const key = Date.now();
-      const tempArr = [...prev];
-      const timeZone = cityList.find(city => city.id === +cityId).shift;
-      const city = cityList.find(city => city.id === +cityId).name;
-      tempArr.push({city, timeZone, key});
-      return tempArr;
-    });
+  const [cardsList, setCardsList] = useState([]);
+   
+  const handleAdd = (evt) => {    
+    evt.preventDefault();
+
+    const { target } = evt;
+    const { inputText: { value } } = target;
+    
+    if (!value) {
+      return;
+    }
+
+    const tempArr = [...cardsList];
+
+    tempArr.push({id: Date.now(), content: value});
+    setCardsList(tempArr);
+    target.reset();
   };
 
-  const removeWatch = (key) => {
+  const handleRemove = (key) => {
     const index = watchList.findIndex(item => item.key === key);
     const tempArr = [...watchList];
 
     if (index !== -1) {
       tempArr.splice(index, 1);
       setWatchList(tempArr);
-    }
-    
+    }    
+  };
+
+  const handleUpdate = () => {
+    console.log('update');
   };
 
   return (
     <div className="container">     
       <Header
-        title="Notes"
+        title={"Notes"}
+        handleUpdate={handleUpdate}
       />
       <Cards
         cardsList={cardsList}
-        handleClose={removeWatch}
+        handleClose={handleRemove}
       /> 
-      <InputForm />         
+      <InputForm
+        handleAdd={handleAdd} 
+      />         
     </div>     
 );
 }

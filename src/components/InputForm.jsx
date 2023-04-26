@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-export default function InputForm({ handleSubmit }) {
+export default function InputForm({ handleAdd }) {
   
   return (    
-    <form action="" className="mt-3" onSubmit={(evt) => handleSubmit(evt, callBack)}>
+    <form action="" className="mt-3" onSubmit={(evt) => handleAdd(evt)}>
       <div className="form-row">        
         <div className="form-group">
-          <label htmlFor="input-text">New note</label>
+          <label htmlFor="inputText">New note</label>
           <div className="input-block">
-            <textarea name="input-text" id="input-text"></textarea>  
+            <textarea id="inputText"></textarea>  
             <button type="submit" className="material-icons add-button">send</button>
           </div>                      
         </div>

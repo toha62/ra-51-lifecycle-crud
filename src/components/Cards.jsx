@@ -1,17 +1,16 @@
 import Card from "./Card";
 
-export default function Cards({ cardsList, handleClose, children }) {
+export default function Cards({ cardsList, handleClose }) {
   return (
-    <div className="card-deck">
+    <div className="row">
       {cardsList.map(card => (
-        <Card cardText={card.text}>
+        <Card key={card.id} cardText={card.content}>
           <button
             className="material-icons close-button"
             onClick={handleClose}
           >clear</button>
         </Card>
-      ))}
-      {children}
+      ))}      
     </div>
   );
 }
