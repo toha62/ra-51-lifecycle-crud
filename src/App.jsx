@@ -5,8 +5,9 @@ import Cards from './components/Cards';
 
 function App() {
   const [cardsList, setCardsList] = useState([]);
+  const url = new URL('http://localhost:7070/notes');
    
-  const handleAdd = (evt) => {    
+  const handleAdd = async (evt) => {    
     evt.preventDefault();
 
     const { target } = evt;
@@ -16,26 +17,56 @@ function App() {
       return;
     }
 
-    const tempArr = [...cardsList];
+    const obj = {id: 0, content: value};
 
-    tempArr.push({id: Date.now(), content: value});
-    setCardsList(tempArr);
     target.reset();
+
+    const response = await fetch(url.href, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(obj)
+    });
+
+    if (response.ok) {
+      reloadData();
+    } else {
+      throw new Error('Error sending data to server');
+    }   
   };
 
-  const handleRemove = (key) => {
-    const index = watchList.findIndex(item => item.key === key);
-    const tempArr = [...watchList];
+  const handleRemove = async (id) => {    
+    const response = await fetch(url.href + `/${id}`, {
+      method: 'DELETE'      
+    });
 
-    if (index !== -1) {
-      tempArr.splice(index, 1);
-      setWatchList(tempArr);
-    }    
+    if (response.ok) {
+      reloadData();
+    } else {
+      throw new Error('Error deleting data from server');
+    } 
   };
 
-  const handleUpdate = () => {
-    console.log('update');
+  const reloadData = async () => {
+    const response = await fetch(url.href);
+    
+    if (response.ok) {
+      const data = await response.json();
+      setCardsList(data);
+    } else {
+      throw new Error('Server load data error');
+    }   
   };
+
+  const handleUpdate = async () => {    
+    reloadData();
+  };
+
+  useEffect(() => {
+    console.log('first load');
+    reloadData();
+  }, []);
 
   return (
     <div className="container">     
