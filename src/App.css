@@ -1,0 +1,87 @@
+.mybutton {
+  align-self: flex-end;
+}
+
+.update-button {
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid #000;
+  border-radius: 18px;
+  color: #0f0;
+  transform: rotate(90deg);
+
+  font-size: 24px;
+  align-self: center;
+}
+
+.close-button {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid #000;
+  border-radius: 18px;
+  color: #f00;
+
+  font-size: 24px;
+  align-self: center;
+}
+
+.add-button {
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid #000;
+  border-radius: 18px;
+  color: #000;
+
+  font-size: 24px;
+  align-self: center;
+}
+
+.input-block {
+  position: relative;
+}
+
+#input-text {
+  width: 580px;
+  height: 200px;
+}
+/* body {
+  font: Arial, sans-serif; 
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.box {
+  display: block;
+  box-sizing: border-box;
+  width: 220px;
+  height: 30px;
+
+  padding: 0 15px;
+  margin: 5px auto;
+
+  border: none;
+}
+
+.user-input {
+  background-color: #fff;
+  color: #000;  
+}
+
+.result {
+  background-color: #504b4b;
+  color: #fff;  
+} */
